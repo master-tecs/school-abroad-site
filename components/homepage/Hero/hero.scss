@@ -1,0 +1,108 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh; // slightly more than half the viewport
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+
+  // Background fallback color and image
+  background-color: #6c63ff; // fallback color
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+    url("/assets/images/hero-poster.png") center/cover no-repeat;
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7); // dim video for better text visibility
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 1rem;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+
+    span {
+      color: #ffd60a;
+      font-weight: 700;
+    }
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 2rem;
+
+    .highlight {
+      color: #ffd60a; // accent color for emphasis
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row; // horizontal layout for desktop
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &--primary {
+        background: #732efd;
+        color: white;
+
+        &:hover {
+          background: #5a23c8;
+        }
+      }
+
+      &--outline {
+        border: 2px solid white;
+        color: white;
+        background: transparent;
+
+        &:hover {
+          background: white;
+          color: #1e294a;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    height: 80vh; // slightly taller for mobile
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__buttons {
+      flex-direction: column;
+    }
+  }
+}

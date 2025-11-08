@@ -1,0 +1,93 @@
+.colleges-section {
+    padding: 5rem 0;
+    background: #f9f9fb;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      @media (max-width: 768px) {
+        padding: 0 1rem;
+      }
+
+      @media (max-width: 480px) {
+        padding: 0 0.5rem;
+      }
+    }
+  
+    .colleges-title {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #1e1e2f;
+  
+      .highlight {
+        color: #732efd;
+      }
+    }
+  
+    .colleges-subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+  
+    .colleges-logos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 2rem;
+      justify-items: center;
+      align-items: center;
+      margin-top: 3rem;
+    }
+  
+    .college-card {
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+      &:hover {
+        transform: translateY(-5px);
+      }
+  
+      .college-logo {
+        position: relative;
+        width: 110px;
+        height: 110px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+  
+        &:hover {
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+  
+        .logo-img {
+          object-fit: contain;
+          padding: 15px;
+        }
+      }
+  
+      .college-name {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #333;
+        margin-top: 0.25rem;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      .colleges-title {
+        font-size: 1.5rem;
+      }
+  
+      .college-logo {
+        width: 90px;
+        height: 90px;
+      }
+    }
+  }

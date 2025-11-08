@@ -1,0 +1,186 @@
+.pricing {
+    padding: 5rem 1.5rem;
+    background: #f9faff;
+    color: #1a1a1a;
+    text-align: center;
+  
+    &__header {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+  
+      h1 {
+        font-size: 2.5rem;
+        color: #222;
+        margin-bottom: 1rem;
+      }
+  
+      p {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+    }
+  
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+  
+    &__card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+  
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 30px rgba(115, 46, 253, 0.15);
+      }
+  
+      &.active {
+        border: 2px solid #732efd;
+      }
+  
+      .badge {
+        background: #e6e1ff;
+        color: #4b1cc6;
+        font-weight: 600;
+        font-size: 0.8rem;
+        border-radius: 12px;
+        padding: 0.4rem 0.8rem;
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+  
+      .plan-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.25rem;
+        font-weight: 700;
+  
+        &.platinum {
+          color: #0048b3;
+        }
+  
+        &.diamond {
+          color: #732efd;
+        }
+      }
+  
+      .plan-subtitle {
+        color: #777;
+        margin-bottom: 1.2rem;
+      }
+  
+      .plan-price {
+        margin-bottom: 2rem;
+  
+        span {
+          font-size: 2.5rem;
+          font-weight: 700;
+        }
+  
+        small {
+          color: #888;
+        }
+      }
+  
+      .plan-features {
+        text-align: left;
+        margin-bottom: 2rem;
+        list-style: none;
+  
+        li {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          margin-bottom: 0.6rem;
+          color: #333;
+  
+          svg {
+            color: #732efd;
+          }
+        }
+      }
+  
+      .plan-actions {
+        .btn {
+          width: 100%;
+        }
+  
+        .plan-date {
+          margin-top: 0.5rem;
+          font-size: 0.9rem;
+          color: #777;
+        }
+      }
+    }
+  
+    .btn {
+      display: inline-block;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      padding: 0.8rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  
+      &-primary {
+        background: #732efd;
+        color: #fff;
+  
+        &:hover {
+          background: #5a23c8;
+        }
+  
+        &.btn-diamond {
+          background: #0048b3;
+  
+          &:hover {
+            background: #003180;
+          }
+        }
+      }
+  
+      &-outline {
+        border: 2px solid #732efd;
+        color: #732efd;
+        background: transparent;
+  
+        &:hover {
+          background: #732efd;
+          color: #fff;
+        }
+      }
+    }
+  
+    &__footer {
+      margin-top: 4rem;
+      max-width: 700px;
+      margin-inline: auto;
+      color: #555;
+      line-height: 1.6;
+  
+      strong {
+        color: #732efd;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      &__header h1 {
+        font-size: 2rem;
+      }
+  
+      &__card {
+        padding: 1.5rem;
+      }
+    }
+  }

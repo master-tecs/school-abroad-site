@@ -1,0 +1,260 @@
+.mentorship-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem 0.5rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+      margin-bottom: 0.375rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.125rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  &__book-button {
+    background: linear-gradient(135deg, #0071e3, #0051a0);
+    color: #fff;
+    border: none;
+
+    &:hover {
+      background: linear-gradient(135deg, #0051a0, #003d7a);
+    }
+  }
+
+  &__book-icon {
+    font-size: 1.125rem;
+    margin-right: 0.5rem;
+  }
+
+  &__dialog {
+    max-width: 600px;
+  }
+
+  &__booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__submit-button {
+    background: linear-gradient(135deg, #0071e3, #0051a0);
+    color: #fff;
+    border: none;
+    margin-top: 0.5rem;
+
+    &:hover {
+      background: linear-gradient(135deg, #0051a0, #003d7a);
+    }
+  }
+
+  &__tabs {
+    margin-top: 1rem;
+  }
+
+  &__tabs-list {
+    margin-bottom: 2rem;
+  }
+
+  &__tabs-content {
+    margin-top: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: 0.875rem;
+    }
+  }
+
+  &__card {
+    border: 2px solid #e2e2e7;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #fff;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-color: #0071e3;
+    }
+
+    &--upcoming {
+      border-color: #0071e3;
+      background: linear-gradient(135deg, #f0f9ff 0%, #fff 100%);
+    }
+
+    &--completed {
+      opacity: 0.95;
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  &__card-badge {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    &--upcoming {
+      background: linear-gradient(135deg, #0071e3, #0051a0);
+      color: #fff;
+      border: none;
+    }
+
+    &--completed {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      border: none;
+    }
+  }
+
+  &__card-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  &__card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f5f5f7;
+    border-radius: 8px;
+  }
+
+  &__card-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  &__card-info-icon {
+    font-size: 1.125rem;
+    color: #0071e3;
+    flex-shrink: 0;
+  }
+
+  &__card-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 0.625rem;
+
+      button {
+        width: 100%;
+        min-height: 44px;
+      }
+    }
+  }
+
+  &__card-button {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &--primary {
+      background: linear-gradient(135deg, #0071e3, #0051a0);
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background: linear-gradient(135deg, #0051a0, #003d7a);
+      }
+    }
+  }
+
+  &__card-button-icon {
+    font-size: 1rem;
+  }
+}
+

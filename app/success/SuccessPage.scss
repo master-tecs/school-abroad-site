@@ -1,0 +1,151 @@
+.success-page {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #ffd54f, #ffca28, #ffb300);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    color: #1a1a1a;
+  
+    &__header {
+      text-align: center;
+      margin-bottom: 2rem;
+  
+      .badge {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem auto;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  
+        .badge-icon {
+          width: 40px;
+          height: 40px;
+          color: #ffca28;
+        }
+      }
+  
+      .success-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+  
+      .success-description {
+        font-size: 1rem;
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.5;
+      }
+    }
+  
+    .welcome-card {
+      background: #fff9e6;
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-align: center;
+  
+      .welcome-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin-bottom: 1rem;
+  
+        .party-icon {
+          margin-right: 0.5rem;
+          color: #ffb300;
+        }
+      }
+    }
+  
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 800px;
+      width: 100%;
+      margin-bottom: 2rem;
+  
+      @media(min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+      }
+  
+      .action-card {
+        background: #fff3d3;
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+  
+        .action-title {
+          display: flex;
+          align-items: center;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+  
+          .action-icon {
+            margin-right: 0.5rem;
+            &.yellow { color: #ffb300; }
+            &.green { color: #4caf50; }
+          }
+        }
+  
+        .action-desc {
+          font-size: 0.95rem;
+          line-height: 1.4;
+        }
+      }
+    }
+  
+    .cta-section {
+      text-align: center;
+  
+      .cta-button {
+        background: #ffca28;
+        color: #1a1a1a;
+        font-weight: 600;
+        padding: 0.8rem 2rem;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+        border: none;
+  
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+  
+        .arrow-icon {
+          width: 20px;
+          height: 20px;
+        }
+      }
+  
+      .cta-note {
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        color: #1a1a1a;
+  
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+  }

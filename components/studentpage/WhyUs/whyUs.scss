@@ -1,0 +1,132 @@
+.why-us {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+  
+      @media (max-width: 992px) {
+        flex-direction: column;
+      }
+  
+      .col-left {
+        flex: 1;
+        min-width: 300px;
+  
+        .tagline {
+          font-size: 1rem;
+          font-weight: 600;
+          color: #6c63ff;
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+        }
+  
+        h2 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+          color: #111;
+        }
+  
+        .features {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-bottom: 2rem;
+  
+          .feature-card {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: #fff;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+            &:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            }
+  
+            .feature-number {
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: #6c63ff;
+              flex-shrink: 0;
+            }
+  
+            .feature-content h4 {
+              margin: 0 0 0.3rem;
+              font-size: 1.2rem;
+              color: #111;
+            }
+  
+            .feature-content p {
+              margin: 0;
+              color: #555;
+              line-height: 1.6;
+            }
+          }
+        }
+  
+        .cta-btn {
+          display: inline-block;
+          background: #6c63ff;
+          color: #fff;
+          padding: 0.9rem 2rem;
+          border-radius: 50px;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s ease;
+  
+          &:hover {
+            background: #4a44c1;
+            transform: translateY(-3px);
+          }
+        }
+      }
+  
+      .col-right {
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+  
+        .video-wrapper {
+          position: relative;
+          border-radius: 1rem;
+          overflow: hidden;
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  
+          video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 1rem;
+          }
+  
+          .mute-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 0.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+  
+            svg {
+              font-size: 24px;
+              color: #6c63ff;
+            }
+          }
+        }
+      }
+    }
+  }

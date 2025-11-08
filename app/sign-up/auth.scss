@@ -1,0 +1,341 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/assets/images/about-shape-1.png") no-repeat;
+    background-size: cover;
+    opacity: 0.03;
+    z-index: 0;
+  }
+
+  .auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    min-height: 90vh;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+  }
+
+  // Left Side - Visual
+  .auth-visual {
+    position: relative;
+    background: linear-gradient(135deg, #0071e3 0%, #0051a0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    @media (max-width: 992px) {
+      display: none;
+    }
+
+    &__overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 113, 227, 0.9) 0%,
+        rgba(0, 81, 160, 0.9) 100%
+      );
+      z-index: 1;
+    }
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &__content {
+      position: relative;
+      z-index: 2;
+      padding: 3rem;
+      color: #fff;
+      text-align: center;
+      max-width: 500px;
+    }
+
+    &__logo {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    &__title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      color: #fff;
+    }
+
+    &__description {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
+    }
+
+    &__features {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.05rem;
+
+        .feature-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          flex-shrink: 0;
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+
+  // Right Side - Form
+  .auth-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    background: #fff;
+
+    @media (max-width: 768px) {
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  .auth-form-wrapper {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .auth-form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    .auth-form-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .auth-form-subtitle {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+  }
+
+  .auth-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .auth-google-button {
+    width: 100%;
+    height: 56px;
+    border: 2px solid #e2e2e7;
+    background: #fff;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover:not(:disabled) {
+      border-color: #0071e3;
+      background: #f5f5f7;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 113, 227, 0.15);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    &.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid #e2e2e7;
+      border-top-color: #0071e3;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  }
+
+  .auth-divider {
+    position: relative;
+    text-align: center;
+    margin: 1rem 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #e2e2e7;
+    }
+
+    span {
+      position: relative;
+      background: #fff;
+      padding: 0 1rem;
+      color: #999;
+      font-size: 0.875rem;
+    }
+  }
+
+  .auth-info-box {
+    text-align: center;
+    padding: 1rem;
+    background: #f5f5f7;
+    border-radius: 12px;
+
+    p {
+      font-size: 0.95rem;
+      color: #666;
+      margin: 0;
+    }
+  }
+
+  .auth-link {
+    color: #0071e3;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #0051a0;
+      text-decoration: underline;
+    }
+  }
+
+  .auth-link-inline {
+    color: #0071e3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #0051a0;
+      text-decoration: underline;
+    }
+  }
+
+  .auth-form-footer {
+    margin-top: 2rem;
+    text-align: center;
+
+    .auth-terms {
+      font-size: 0.875rem;
+      color: #999;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+
+  // Loading state
+  .auth-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    .auth-loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #e2e2e7;
+      border-top-color: #0071e3;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Mobile optimizations
+@media (max-width: 992px) {
+  .auth-page {
+    .auth-container {
+      border-radius: 0;
+      min-height: 100vh;
+    }
+
+    .auth-visual {
+      display: none;
+    }
+  }
+}

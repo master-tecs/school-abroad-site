@@ -1,0 +1,121 @@
+.pricing-section {
+  padding: 6rem 0;
+  background-color: #fff;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    h2 {
+      font-size: 2.4rem;
+      color: #111;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+  }
+
+  .pricing-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+
+    .pricing-card {
+      background: #f8f7ff;
+      border-radius: 1rem;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      flex: 1 1 calc(33.333% - 1.33rem); // 3 cards per row max
+      max-width: 320px;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+      &.highlight {
+        background: #6c63ff; // primary purple
+        color: #fff;
+      
+        h3,
+        .description,
+        .price {
+          color: #fff;
+        }
+      
+        .cta-btn {
+          background: #ffbb33; // warm, eye-catching accent
+          color: #111; // dark text for contrast
+      
+          &:hover {
+            background: #ffaa00; // slightly darker for hover
+            transform: translateY(-2px);
+          }
+        }
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .description {
+        font-size: 1rem;
+        color: inherit;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .price {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: inherit;
+        margin-bottom: 2rem;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: #6c63ff;
+        color: #fff;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #4a44c1;
+          transform: translateY(-3px);
+        }
+      }
+    }
+  }
+
+  .note {
+    text-align: center;
+    margin-top: 2rem;
+    font-style: italic;
+    color: #777;
+  }
+
+  // Responsive adjustments
+  @media (max-width: 1024px) {
+    .pricing-cards .pricing-card {
+      flex: 1 1 calc(50% - 1rem); // 2 cards per row
+    }
+  }
+
+  @media (max-width: 600px) {
+    .pricing-cards .pricing-card {
+      flex: 1 1 100%; // 1 card per row
+    }
+  }
+}
