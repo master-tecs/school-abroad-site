@@ -11,33 +11,77 @@
 
   // Hero Section
   .agency-hero {
-    background: linear-gradient(135deg, #0071e3 0%, #0051a0 100%);
+    position: relative;
+    background: linear-gradient(135deg, #732efd 0%, #5a23c8 100%);
     color: #fff;
-    padding: 6rem 0 5rem;
+    padding: 8rem 0 6rem;
     text-align: center;
+    overflow: hidden;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Background image with overlay
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("/assets/images/agency-hero-bg.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.25;
+      z-index: 0;
+    }
+
+    // Additional gradient overlay for better text readability
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 113, 227, 0.85) 0%,
+        rgba(0, 81, 160, 0.85) 100%
+      );
+      z-index: 1;
+    }
 
     &__content {
-      max-width: 900px;
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
       margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
     &__subtitle {
-      font-size: 1rem;
-      letter-spacing: 2px;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 1rem;
-      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      opacity: 0.95;
       font-weight: 600;
+      color: #ffcc00;
     }
 
     &__title {
-      font-size: 3.5rem;
+      font-size: 4rem;
       font-weight: 700;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 
       .highlight {
         color: #ffcc00;
+        text-shadow: 0 2px 10px rgba(255, 204, 0, 0.3);
       }
 
       @media (max-width: 768px) {
@@ -46,27 +90,29 @@
     }
 
     &__description {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       font-weight: 500;
-      margin-bottom: 1.5rem;
-      opacity: 0.95;
+      margin-bottom: 2rem;
+      opacity: 0.98;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
       @media (max-width: 768px) {
-        font-size: 1.25rem;
+        font-size: 1.35rem;
       }
     }
 
     &__text {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-      opacity: 0.9;
-      max-width: 800px;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+      opacity: 0.92;
+      max-width: 850px;
       margin-left: auto;
       margin-right: auto;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 
       @media (max-width: 768px) {
-        font-size: 1rem;
+        font-size: 1.05rem;
       }
     }
   }
@@ -80,7 +126,7 @@
       font-size: 0.875rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #0071e3;
+      color: #732efd;
       font-weight: 600;
       margin-bottom: 0.75rem;
     }
@@ -109,21 +155,36 @@
   .section-cta {
     text-align: center;
     margin-top: 3rem;
+
+    button,
+    a {
+      padding: 0.9rem 2rem !important;
+      border-radius: 50px !important;
+      font-weight: 600 !important;
+      font-size: 1rem !important;
+      height: auto !important;
+    }
   }
 
   // Why Partner Section
   .why-partner {
-    padding: 5rem 0;
-    background-color: #fff;
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
 
     .benefits-list {
-      max-width: 800px;
+      max-width: 850px;
       margin: 3rem auto 0;
       background: #fff;
-      padding: 2.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
       border: 1px solid #e2e2e7;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+      }
 
       .benefits-intro {
         font-size: 1.25rem;
@@ -149,7 +210,7 @@
           }
 
           .check-icon {
-            color: #0071e3;
+            color: #732efd;
             font-size: 1.5rem;
             flex-shrink: 0;
             margin-top: 0.125rem;
@@ -167,8 +228,8 @@
 
   // Commission Model Section
   .commission-model {
-    padding: 5rem 0;
-    background-color: #f5f5f7;
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%);
 
     .commission-table-wrapper {
       overflow-x: auto;
@@ -184,7 +245,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
       thead {
-        background: linear-gradient(135deg, #0071e3, #0051a0);
+        background: linear-gradient(135deg, #732efd, #5a23c8);
         color: #fff;
 
         th {
@@ -222,7 +283,7 @@
             &.percentage-cell {
               font-size: 1.5rem;
               font-weight: 700;
-              color: #0071e3;
+              color: #732efd;
               text-align: center;
             }
           }
@@ -259,8 +320,19 @@
 
   // How It Works Section
   .how-it-works {
-    padding: 5rem 0;
+    padding: 6rem 0;
     background-color: #fff;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e2e2e7, transparent);
+    }
 
     .steps-grid {
       display: grid;
@@ -270,16 +342,34 @@
 
       .step-card {
         position: relative;
-        background: linear-gradient(135deg, #f5f5f7 0%, #fff 100%);
-        padding: 2.5rem 2rem;
-        border-radius: 16px;
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        padding: 3rem 2.5rem;
+        border-radius: 20px;
         border: 2px solid #e2e2e7;
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, #732efd, #5a23c8);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.4s ease;
+        }
 
         &:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-          border-color: #0071e3;
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0, 113, 227, 0.15);
+          border-color: #732efd;
+
+          &::before {
+            transform: scaleX(1);
+          }
         }
 
         .step-number {
@@ -288,7 +378,7 @@
           right: 1.5rem;
           font-size: 3rem;
           font-weight: 700;
-          color: #0071e3;
+          color: #732efd;
           opacity: 0.15;
           line-height: 1;
         }
@@ -297,7 +387,7 @@
           width: 70px;
           height: 70px;
           border-radius: 16px;
-          background: linear-gradient(135deg, #0071e3, #0051a0);
+          background: linear-gradient(135deg, #732efd, #5a23c8);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -327,8 +417,8 @@
 
   // Partnership Benefits Section
   .partnership-benefits {
-    padding: 5rem 0;
-    background-color: #f5f5f7;
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%);
 
     .benefits-grid {
       display: grid;
@@ -338,22 +428,41 @@
 
       .benefit-card {
         background: #fff;
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 2.5rem 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid #e2e2e7;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(0, 113, 227, 0.03), transparent);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
 
         &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+          transform: translateY(-8px);
+          box-shadow: 0 15px 35px rgba(0, 113, 227, 0.15);
+          border-color: #732efd;
+
+          &::after {
+            opacity: 1;
+          }
         }
 
         .benefit-icon {
           width: 60px;
           height: 60px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #0071e3, #0051a0);
+          background: linear-gradient(135deg, #732efd, #5a23c8);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -383,7 +492,7 @@
 
   // Who Can Apply Section
   .who-can-apply {
-    padding: 5rem 0;
+    padding: 6rem 0;
     background-color: #fff;
 
     .applicants-grid {
@@ -394,22 +503,23 @@
       margin-bottom: 2rem;
 
       .applicant-card {
-        background: #fff;
-        padding: 2.5rem 2rem;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        padding: 3rem 2rem;
+        border-radius: 16px;
         text-align: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid #e2e2e7;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid #e2e2e7;
 
         &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 15px 35px rgba(0, 113, 227, 0.15);
+          border-color: #732efd;
         }
 
         .applicant-icon {
           font-size: 3.5rem;
-          color: #0071e3;
+          color: #732efd;
           margin-bottom: 1.5rem;
         }
 
@@ -433,19 +543,68 @@
 
   // Agency Form Section
   .agency-form-section {
-    padding: 5rem 0;
-    background-color: #f5f5f7;
+    padding: 6rem 0;
+    background: linear-gradient(180deg, #f5f5f7 0%, #fff 100%);
 
     .form-wrapper {
       background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      padding: 4rem;
       margin-top: 3rem;
       border: 1px solid #e2e2e7;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #732efd, #5a23c8);
+      }
 
       @media (max-width: 768px) {
         padding: 2rem 1.5rem;
+      }
+
+      .form-cta {
+        text-align: center;
+        padding: 4rem 3rem;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 20px;
+        border: 2px solid #732efd;
+
+        .form-cta-icon {
+          font-size: 4rem;
+          color: #732efd;
+          margin-bottom: 1.5rem;
+        }
+
+        h3 {
+          font-size: 2rem;
+          font-weight: 600;
+          color: #732efd;
+          margin-bottom: 1rem;
+        }
+
+        p {
+          font-size: 1.15rem;
+          color: #555;
+          line-height: 1.8;
+          max-width: 600px;
+          margin: 0 auto 2rem;
+        }
+
+        .form-cta-button {
+          padding: 0.9rem 2rem !important;
+          border-radius: 50px !important;
+          font-weight: 600 !important;
+          font-size: 1rem !important;
+          height: auto !important;
+        }
       }
 
       .success-message {
@@ -453,18 +612,18 @@
         padding: 3rem 2rem;
         background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
         border-radius: 12px;
-        border: 2px solid #0071e3;
+        border: 2px solid #732efd;
 
         .success-icon {
           font-size: 4rem;
-          color: #0071e3;
+          color: #732efd;
           margin-bottom: 1.5rem;
         }
 
         h3 {
           font-size: 2rem;
           font-weight: 600;
-          color: #0071e3;
+          color: #732efd;
           margin-bottom: 1rem;
         }
 
@@ -494,7 +653,7 @@
             color: #111;
             margin-bottom: 1.5rem;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid #0071e3;
+            border-bottom: 2px solid #732efd;
           }
         }
 
@@ -574,7 +733,7 @@
 
             &:focus {
               outline: none;
-              border-color: #0071e3;
+              border-color: #732efd;
               box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
             }
 
@@ -591,6 +750,14 @@
         .form-submit {
           margin-top: 2rem;
           text-align: center;
+
+          button {
+            padding: 0.9rem 2rem !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            height: auto !important;
+          }
         }
       }
     }
@@ -638,7 +805,7 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: #0071e3;
+            color: #732efd;
             font-weight: 600;
             font-size: 1.2rem;
           }
@@ -678,7 +845,7 @@
 
         .contact-icon {
           font-size: 2.5rem;
-          color: #0071e3;
+          color: #732efd;
           flex-shrink: 0;
         }
 
@@ -690,13 +857,13 @@
         }
 
         a {
-          color: #0071e3;
+          color: #732efd;
           text-decoration: none;
           font-size: 1.05rem;
           transition: color 0.2s ease;
 
           &:hover {
-            color: #0051a0;
+            color: #5a23c8;
             text-decoration: underline;
           }
         }

@@ -11,7 +11,7 @@
 
   // Hero Section
   .contact-hero {
-    background: linear-gradient(135deg, #0071e3 0%, #0051a0 100%);
+    background: linear-gradient(135deg, #732efd 0%, #5a23c8 100%);
     color: #fff;
     padding: 6rem 0 5rem;
     text-align: center;
@@ -83,7 +83,7 @@
       font-size: 0.875rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #0071e3;
+      color: #732efd;
       font-weight: 600;
       margin-bottom: 0.75rem;
     }
@@ -141,7 +141,7 @@
           width: 80px;
           height: 80px;
           border-radius: 20px;
-          background: linear-gradient(135deg, #0071e3, #0051a0);
+          background: linear-gradient(135deg, #732efd, #5a23c8);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -168,14 +168,14 @@
         }
 
         .contact-link {
-          color: #0071e3;
+          color: #732efd;
           text-decoration: none;
           font-size: 1.1rem;
           font-weight: 500;
           transition: color 0.2s ease;
 
           &:hover {
-            color: #0051a0;
+            color: #5a23c8;
             text-decoration: underline;
           }
         }
@@ -204,7 +204,7 @@
           }
 
           .hours-note {
-            color: #0071e3;
+            color: #732efd;
             font-weight: 600;
             font-size: 0.95rem;
           }
@@ -235,18 +235,18 @@
         padding: 3rem 2rem;
         background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
         border-radius: 12px;
-        border: 2px solid #0071e3;
+        border: 2px solid #732efd;
 
         .success-icon {
           font-size: 4rem;
-          color: #0071e3;
+          color: #732efd;
           margin-bottom: 1.5rem;
         }
 
         h3 {
           font-size: 2rem;
           font-weight: 600;
-          color: #0071e3;
+          color: #732efd;
           margin-bottom: 1rem;
         }
 
@@ -288,6 +288,20 @@
               color: #ff3b30;
             }
           }
+
+          input,
+          textarea {
+            padding: 0.75rem 0.9rem;
+            border-radius: 9px;
+            border: 1px solid #e2e2e7;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+          }
+
+          textarea {
+            height: 150px;
+          }
         }
 
         .form-submit {
@@ -295,6 +309,12 @@
           text-align: center;
 
           button {
+            padding: 0.9rem 2rem !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            height: auto !important;
+
             .btn-icon {
               margin-right: 0.5rem;
             }
@@ -372,7 +392,7 @@
             width: 60px;
             height: 60px;
             border-radius: 12px;
-            background: linear-gradient(135deg, #0071e3, #0051a0);
+            background: linear-gradient(135deg, #732efd, #5a23c8);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -406,7 +426,7 @@
               display: inline-flex;
               align-items: center;
               gap: 0.5rem;
-              color: #0071e3;
+              color: #732efd;
               text-decoration: none;
               font-weight: 500;
               font-size: 1.05rem;
@@ -417,7 +437,7 @@
               }
 
               &:hover {
-                color: #0051a0;
+                color: #5a23c8;
                 text-decoration: underline;
               }
             }
@@ -513,7 +533,7 @@
   // Quick Contact CTA
   .quick-contact-cta {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #0071e3 0%, #0051a0 100%);
+    background: linear-gradient(135deg, #732efd 0%, #5a23c8 100%);
     color: #fff;
     text-align: center;
 
@@ -550,12 +570,66 @@
         flex-wrap: wrap;
 
         button {
+          padding: 0.9rem 2rem !important;
+          border-radius: 50px !important;
+          font-weight: 600 !important;
+          font-size: 1rem !important;
+          height: auto !important;
+          transition: all 0.3s ease !important;
+          min-width: 160px;
+          border-width: 2px !important;
+
           a {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             text-decoration: none;
             color: inherit;
+            width: 100%;
+          }
+
+          // Default button (Call Now) - white background on blue
+          &:first-child {
+            background: #fff !important;
+            color: #732efd !important;
+            border-color: #fff !important;
+            border-style: solid !important;
+
+            &:hover {
+              background: #f5f5f7 !important;
+              border-color: #f5f5f7 !important;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+            }
+
+            a {
+              color: #732efd !important;
+            }
+          }
+
+          // Outline button (Email Us) - transparent with white border
+          &:last-child {
+            background: transparent !important;
+            color: #fff !important;
+            border-color: #fff !important;
+            border-style: solid !important;
+
+            &:hover {
+              background: #fff !important;
+              color: #732efd !important;
+              border-color: #fff !important;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+
+              a {
+                color: #732efd !important;
+              }
+            }
+
+            a {
+              color: #fff !important;
+            }
           }
         }
       }

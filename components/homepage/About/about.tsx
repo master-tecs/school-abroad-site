@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import './about.scss';
+import Image from "next/image";
+import "./about.scss";
 
 export default function About() {
   return (
@@ -44,22 +44,25 @@ export default function About() {
 
             <div className="text">
               <p>
-                <strong>School Abroad</strong> (formerly <b>School Outside</b>) is a dedicated
-                educational travel and global student recruitment agency committed to empowering
-                students with transformative academic experiences.
+                <strong>School Abroad</strong> (formerly <b>School Outside</b>)
+                is a dedicated educational travel and global student recruitment
+                agency committed to empowering students with transformative
+                academic experiences.
               </p>
               <p>
-                We bridge the gap between aspiring learners and renowned educational institutions
-                worldwide, fostering opportunities that go beyond borders.
+                We bridge the gap between aspiring learners and renowned
+                educational institutions worldwide, fostering opportunities that
+                go beyond borders.
               </p>
               <p>
-                From choosing the right school to navigating visa and application processes, our
-                team provides personalized guidance every step of the way, ensuring a seamless
-                journey toward academic success and global discovery.
+                From choosing the right school to navigating visa and
+                application processes, our team provides personalized guidance
+                every step of the way, ensuring a seamless journey toward
+                academic success and global discovery.
               </p>
             </div>
 
-            <a href="/about" className="primary-btn">
+            <a href="/about-us" className="primary-btn">
               Learn More
             </a>
           </div>

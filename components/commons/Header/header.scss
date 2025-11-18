@@ -36,7 +36,7 @@ ul {
 
   /* ---------- TOPBAR ---------- */
   &__topbar {
-    background: linear-gradient(135deg, #0071e3 0%, #0051a0 100%);
+    background: linear-gradient(135deg, #732efd 0%, #5a23c8 100%);
     color: white;
     font-size: 0.875rem;
     padding: 0.5rem 0;
@@ -243,7 +243,7 @@ ul {
         transition: color 0.3s ease;
 
         &:hover {
-          color: #0071e3;
+          color: #732efd;
         }
 
         &::after {
@@ -253,7 +253,7 @@ ul {
           left: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #0071e3, #0051a0);
+          background: linear-gradient(90deg, #732efd, #5a23c8);
           transition: width 0.3s ease;
         }
 
@@ -263,7 +263,7 @@ ul {
       }
 
       &--active a {
-        color: #0071e3;
+        color: #732efd;
         
         &::after {
           width: 100%;
@@ -295,25 +295,33 @@ ul {
   }
 
   &__sign-in-btn {
-    color: #333;
-    font-weight: 500;
+    color: #333 !important;
+    font-weight: 600 !important;
+    padding: 0.9rem 2rem !important;
+    border-radius: 50px !important;
+    font-size: 1rem !important;
+    height: auto !important;
     
     &:hover {
-      color: #0071e3;
-      background: #f5f5f7;
+      color: #732efd !important;
+      background: #f5f5f7 !important;
     }
   }
 
   &__sign-up-btn {
-    background: linear-gradient(135deg, #0071e3, #0051a0);
-    color: #fff;
-    font-weight: 500;
-    border: none;
+    background: linear-gradient(135deg, #732efd, #5a23c8) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    border: none !important;
+    padding: 0.9rem 2rem !important;
+    border-radius: 50px !important;
+    font-size: 1rem !important;
+    height: auto !important;
     
     &:hover {
-      background: linear-gradient(135deg, #0051a0, #003d7a);
+      background: linear-gradient(135deg, #5a23c8, #4a1da5) !important;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+      box-shadow: 0 4px 12px rgba(115, 46, 253, 0.3);
     }
   }
 
@@ -329,11 +337,11 @@ ul {
 
     &:hover {
       transform: scale(1.05);
-      outline-color: #0071e3;
+      outline-color: #732efd;
     }
 
     &:focus-visible {
-      outline: 2px solid #0071e3;
+      outline: 2px solid #732efd;
       outline-offset: 2px;
     }
   }
@@ -350,12 +358,12 @@ ul {
     }
 
     &:hover {
-      border-color: #0071e3;
+      border-color: #732efd;
     }
   }
 
   &__avatar-fallback {
-    background: linear-gradient(135deg, #0071e3, #0051a0);
+    background: linear-gradient(135deg, #732efd, #5a23c8);
     color: #fff;
     font-weight: 600;
     font-size: 0.875rem;
@@ -430,7 +438,7 @@ ul {
 
     &:hover {
       background: #f5f5f7;
-      color: #0071e3;
+      color: #732efd;
     }
 
     svg {
@@ -499,7 +507,7 @@ ul {
 
       &:hover {
         background: #f5f5f7;
-        color: #0071e3;
+        color: #732efd;
       }
 
       svg {
@@ -549,13 +557,14 @@ ul {
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      font-weight: 500;
+      font-weight: 600;
       color: #333;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
       transition: all 0.3s ease;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      justify-content: center;
 
       &:hover {
         color: #0071e3;
@@ -563,12 +572,12 @@ ul {
       }
 
       &--primary {
-        background: linear-gradient(135deg, #0071e3, #0051a0);
+        background: linear-gradient(135deg, #732efd, #5a23c8);
         color: #fff;
         justify-content: center;
 
         &:hover {
-          background: linear-gradient(135deg, #0051a0, #003d7a);
+          background: linear-gradient(135deg, #5a23c8, #4a1da5);
           color: #fff;
         }
       }
@@ -610,7 +619,7 @@ ul {
   .header__menu-item {
     a.active,
     a[aria-current="page"] {
-      color: #0071e3;
+      color: #732efd;
       
       &::after {
         width: 100%;

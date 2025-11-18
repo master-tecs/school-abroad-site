@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import "./partner.scss";
 import BusinessIcon from "@mui/icons-material/Business";
 import SchoolIcon from "@mui/icons-material/School";
@@ -12,118 +11,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 
 export default function PartnerPage() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const formDataObj = new FormData(e.currentTarget);
-      
-      // Extract form data, converting FormDataEntryValue to string
-      const data: Record<string, string | string[]> = {};
-      for (const [key, value] of formDataObj.entries()) {
-        // Skip file inputs for now
-        if (value instanceof File) {
-          continue;
-        }
-        const stringValue = String(value);
-        if (data[key]) {
-          // If key already exists, convert to array
-          const existing = data[key];
-          data[key] = Array.isArray(existing)
-            ? [...existing, stringValue]
-            : [existing as string, stringValue];
-        } else {
-          data[key] = stringValue;
-        }
-      }
-      
-      // Handle checkboxes separately
-      const studentLevels = formDataObj.getAll("studentLevel").filter(
-        (v): v is string => typeof v === "string"
-      ) as string[];
-      const collaborationInterests = formDataObj
-        .getAll("collaborationInterest")
-        .filter((v): v is string => typeof v === "string") as string[];
-      
-      data.studentLevels = studentLevels;
-      data.collaborationInterests = collaborationInterests;
-      
-      await sendPartnerEmail(data);
-      setSuccess(true);
-    } catch (error) {
-      console.error("Error sending email:", error);
-      alert("Failed to submit form. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function sendPartnerEmail(data: Record<string, string | string[]>) {
-    const confirmationEmail = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-          }
-          .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #eaeaea;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-          }
-          h1 {
-            color: #0071e3;
-          }
-          .footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #999;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>Thank You for Your Partnership Interest!</h1>
-          <p>Dear ${data.contactName},</p>
-          <p>We have received your partnership request and our team is currently reviewing it. We will contact you within 3–5 business days to discuss collaboration details and next steps.</p>
-          <p>Thank you for your interest in partnering with School Abroad.</p>
-          <p>Best regards,<br><strong>The School Abroad Partnership Team</strong></p>
-          <hr />
-          <p class="footer">This is an automated email. Please do not reply to this address. For further assistance, contact <a href="mailto:institutions@schoolabroad.org">institutions@schoolabroad.org</a>.</p>
-        </div>
-      </body>
-      </html>
-    `;
-
-    const response = await fetch("/api/partner-submission", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data, confirmationEmail }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to submit form");
-    }
-  }
 
   return (
     <div className="partner-page">
@@ -389,322 +279,30 @@ export default function PartnerPage() {
             <h6 className="section-tag">Get Started</h6>
             <h2 className="section-title">Institution Partnership Form</h2>
             <p className="section-description">
-              Fill out the form below and our partnership team will contact you
-              within 3–5 business days.
+              Click the button below to fill out our partnership application form.
+              Our partnership team will contact you within 3–5 business days to
+              discuss collaboration details and next steps.
             </p>
           </div>
 
           <div className="form-wrapper">
-            {success ? (
-              <div className="success-message">
-                <CheckCircleIcon className="success-icon" />
-                <h3>Thank You!</h3>
-                <p>
-                  We have received your partnership request. Our team will
-                  contact you within 3–5 business days to discuss collaboration
-                  details and next steps.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="partnership-form">
-                <div className="form-section">
-                  <h3 className="form-section-title">Institution Details</h3>
-                  <div className="form-grid">
-                    <div className="form-group">
-                      <Label htmlFor="institutionName">
-                        Institution Name <span className="required">*</span>
-                      </Label>
-                      <Input
-                        id="institutionName"
-                        name="institutionName"
-                        type="text"
-                        required
-                        placeholder="Enter institution name"
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <Label htmlFor="institutionType">
-                        Type of Institution <span className="required">*</span>
-                      </Label>
-                      <select
-                        id="institutionType"
-                        name="institutionType"
-                        required
-                        className="select-native"
-                      >
-                        <option value="">Select institution type</option>
-                        <option value="university">University</option>
-                        <option value="college">College</option>
-                        <option value="language-school">Language School</option>
-                        <option value="vocational-school">Vocational School</option>
-                        <option value="foundation-program">
-                          Foundation Program Provider
-                        </option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <Label htmlFor="country">
-                        Country <span className="required">*</span>
-                      </Label>
-                      <Input
-                        id="country"
-                        name="country"
-                        type="text"
-                        required
-                        placeholder="Enter country"
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <Label htmlFor="city">
-                        City <span className="required">*</span>
-                      </Label>
-                      <Input
-                        id="city"
-                        name="city"
-                        type="text"
-                        required
-                        placeholder="Enter city"
-                      />
-                    </div>
-
-                    <div className="form-group full-width">
-                      <Label htmlFor="website">
-                        Website <span className="required">*</span>
-                      </Label>
-                      <Input
-                        id="website"
-                        name="website"
-                        type="url"
-                        required
-                        placeholder="https://www.example.com"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-section">
-                  <h3 className="form-section-title">Contact Information</h3>
-                  <div className="form-grid">
-                    <div className="form-group">
-                      <Label htmlFor="contactName">
-                        Contact Person Name <span className="required">*</span>
-                      </Label>
-                      <Input
-                        id="contactName"
-                        name="contactName"
-                        type="text"
-                        required
-                        placeholder="Enter contact person name"
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <Label htmlFor="contactEmail">
-                        Contact Person Email{" "}
-                        <span className="required">*</span>
-                      </Label>
-                      <Input
-                        id="contactEmail"
-                        name="contactEmail"
-                        type="email"
-                        required
-                        placeholder="contact@example.com"
-                      />
-                    </div>
-
-                    <div className="form-group full-width">
-                      <Label htmlFor="contactPhone">
-                        Contact Phone (with country code){" "}
-                        <span className="required">*</span>
-                      </Label>
-                      <Input
-                        id="contactPhone"
-                        name="contactPhone"
-                        type="tel"
-                        required
-                        placeholder="+33 7 69 02 00 91"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-section">
-                  <h3 className="form-section-title">Program Information</h3>
-                  <div className="form-group full-width">
-                    <Label htmlFor="programs">
-                      Programs/Courses Offered{" "}
-                      <span className="required">*</span>
-                    </Label>
-                    <Textarea
-                      id="programs"
-                      name="programs"
-                      rows={4}
-                      required
-                      placeholder="Describe the programs and courses your institution offers..."
-                    />
-                  </div>
-
-                  <div className="form-group full-width">
-                    <Label>
-                      Student Level of Interest{" "}
-                      <span className="required">*</span>
-                    </Label>
-                    <div className="checkbox-group">
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="undergraduate"
-                          name="studentLevel"
-                          value="Undergraduate"
-                        />
-                        <Label htmlFor="undergraduate">Undergraduate</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="graduate"
-                          name="studentLevel"
-                          value="Graduate"
-                        />
-                        <Label htmlFor="graduate">Graduate</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="diploma"
-                          name="studentLevel"
-                          value="Diploma"
-                        />
-                        <Label htmlFor="diploma">Diploma</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="certificate"
-                          name="studentLevel"
-                          value="Certificate"
-                        />
-                        <Label htmlFor="certificate">Certificate</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="language"
-                          name="studentLevel"
-                          value="Language Programs"
-                        />
-                        <Label htmlFor="language">Language Programs</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="foundation"
-                          name="studentLevel"
-                          value="Foundation Programs"
-                        />
-                        <Label htmlFor="foundation">Foundation Programs</Label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group full-width">
-                    <Label>
-                      Collaboration Interest{" "}
-                      <span className="required">*</span>
-                    </Label>
-                    <div className="checkbox-group">
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="recruitment"
-                          name="collaborationInterest"
-                          value="Student Recruitment"
-                        />
-                        <Label htmlFor="recruitment">Student Recruitment</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="marketing"
-                          name="collaborationInterest"
-                          value="Joint Marketing"
-                        />
-                        <Label htmlFor="marketing">Joint Marketing</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="agent-access"
-                          name="collaborationInterest"
-                          value="Agent Access"
-                        />
-                        <Label htmlFor="agent-access">Agent Access</Label>
-                      </div>
-                      <div className="checkbox-item">
-                        <Checkbox
-                          id="other-collab"
-                          name="collaborationInterest"
-                          value="Other"
-                        />
-                        <Label htmlFor="other-collab">Other</Label>
-                      </div>
-                    </div>
-                  </div>
-
-                    <div className="form-group">
-                      <Label htmlFor="annualCapacity">
-                        Estimated Annual International Student Capacity{" "}
-                        <span className="required">*</span>
-                      </Label>
-                      <select
-                        id="annualCapacity"
-                        name="annualCapacity"
-                        required
-                        className="select-native"
-                      >
-                        <option value="">Select capacity range</option>
-                        <option value="1-50">1 - 50 students</option>
-                        <option value="51-100">51 - 100 students</option>
-                        <option value="101-250">101 - 250 students</option>
-                        <option value="251-500">251 - 500 students</option>
-                        <option value="501-1000">501 - 1,000 students</option>
-                        <option value="1000+">1,000+ students</option>
-                      </select>
-                    </div>
-                </div>
-
-                <div className="form-section">
-                  <h3 className="form-section-title">Additional Information</h3>
-                  <div className="form-group full-width">
-                    <Label htmlFor="additionalInfo">
-                      Additional Information/Message
-                    </Label>
-                    <Textarea
-                      id="additionalInfo"
-                      name="additionalInfo"
-                      rows={5}
-                      placeholder="Share any additional information about your institution or partnership goals..."
-                    />
-                  </div>
-
-                  <div className="form-group full-width">
-                    <Label htmlFor="institutionFile">
-                      Upload Institutional Profile or Brochure (optional)
-                    </Label>
-                    <Input
-                      id="institutionFile"
-                      name="institutionFile"
-                      type="file"
-                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                    />
-                    <p className="file-hint">
-                      Accepted formats: PDF, DOC, DOCX, JPG, PNG (Max 10MB)
-                    </p>
-                  </div>
-                </div>
-
-                <div className="form-submit">
-                  <Button type="submit" size="lg" disabled={loading}>
-                    {loading ? "Submitting..." : "Submit Partnership Request"}
-                  </Button>
-                </div>
-              </form>
-            )}
+            <div className="form-cta">
+              <CheckCircleIcon className="form-cta-icon" />
+              <h3>Ready to Partner With Us?</h3>
+              <p>
+                Complete our partnership application form to get started. The
+                process is quick and straightforward.
+              </p>
+              <Button size="lg" asChild className="form-cta-button">
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScGgqCsECeL4zgz4ob2_NRU9s96FkjeVCrZ6WLKN7Rvoeyo2w/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Fill Out Partnership Form
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

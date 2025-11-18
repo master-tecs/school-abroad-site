@@ -11,7 +11,7 @@
 
   // Hero Section
   .partner-hero {
-    background: linear-gradient(135deg, #0071e3 0%, #0051a0 100%);
+    background: linear-gradient(135deg, #732efd 0%, #5a23c8 100%);
     color: #fff;
     padding: 6rem 0 5rem;
     text-align: center;
@@ -80,7 +80,7 @@
       font-size: 0.875rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #0071e3;
+      color: #732efd;
       font-weight: 600;
       margin-bottom: 0.75rem;
     }
@@ -109,6 +109,15 @@
   .section-cta {
     text-align: center;
     margin-top: 3rem;
+
+    button,
+    a {
+      padding: 0.9rem 2rem !important;
+      border-radius: 50px !important;
+      font-weight: 600 !important;
+      font-size: 1rem !important;
+      height: auto !important;
+    }
   }
 
   // Why Partner Section
@@ -139,7 +148,7 @@
           width: 60px;
           height: 60px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #0071e3, #0051a0);
+          background: linear-gradient(135deg, #732efd, #5a23c8);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -186,7 +195,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
       thead {
-        background: linear-gradient(135deg, #0071e3, #0051a0);
+        background: linear-gradient(135deg, #732efd, #5a23c8);
         color: #fff;
 
         th {
@@ -257,7 +266,7 @@
         &:hover {
           transform: translateY(-8px);
           box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-          border-color: #0071e3;
+          border-color: #732efd;
         }
 
         .step-number {
@@ -266,7 +275,7 @@
           right: 1.5rem;
           font-size: 3rem;
           font-weight: 700;
-          color: #0071e3;
+          color: #732efd;
           opacity: 0.15;
           line-height: 1;
         }
@@ -275,7 +284,7 @@
           width: 70px;
           height: 70px;
           border-radius: 16px;
-          background: linear-gradient(135deg, #0071e3, #0051a0);
+          background: linear-gradient(135deg, #732efd, #5a23c8);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -331,7 +340,7 @@
 
         .type-icon {
           font-size: 3.5rem;
-          color: #0071e3;
+          color: #732efd;
           margin-bottom: 1.5rem;
         }
 
@@ -376,23 +385,60 @@
         padding: 2rem 1.5rem;
       }
 
-      .success-message {
+      .form-cta {
         text-align: center;
-        padding: 3rem 2rem;
+        padding: 4rem 3rem;
         background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-        border-radius: 12px;
-        border: 2px solid #0071e3;
+        border-radius: 20px;
+        border: 2px solid #732efd;
 
-        .success-icon {
+        .form-cta-icon {
           font-size: 4rem;
-          color: #0071e3;
+          color: #732efd;
           margin-bottom: 1.5rem;
         }
 
         h3 {
           font-size: 2rem;
           font-weight: 600;
-          color: #0071e3;
+          color: #732efd;
+          margin-bottom: 1rem;
+        }
+
+        p {
+          font-size: 1.15rem;
+          color: #555;
+          line-height: 1.8;
+          max-width: 600px;
+          margin: 0 auto 2rem;
+        }
+
+        .form-cta-button {
+          padding: 0.9rem 2rem !important;
+          border-radius: 50px !important;
+          font-weight: 600 !important;
+          font-size: 1rem !important;
+          height: auto !important;
+        }
+      }
+
+      .success-message {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 12px;
+        border: 2px solid #732efd;
+
+        .success-icon {
+          font-size: 4rem;
+          color: #732efd;
+          margin-bottom: 1.5rem;
+        }
+
+        h3 {
+          font-size: 2rem;
+          font-weight: 600;
+          color: #732efd;
           margin-bottom: 1rem;
         }
 
@@ -422,7 +468,7 @@
             color: #111;
             margin-bottom: 1.5rem;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid #0071e3;
+            border-bottom: 2px solid #732efd;
           }
         }
 
@@ -502,7 +548,7 @@
 
             &:focus {
               outline: none;
-              border-color: #0071e3;
+              border-color: #732efd;
               box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
             }
 
@@ -566,7 +612,7 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: #0071e3;
+            color: #732efd;
             font-weight: 600;
             font-size: 1.2rem;
           }
@@ -603,7 +649,7 @@
 
         .contact-icon {
           font-size: 2.5rem;
-          color: #0071e3;
+          color: #732efd;
           flex-shrink: 0;
         }
 
@@ -615,13 +661,13 @@
         }
 
         a {
-          color: #0071e3;
+          color: #732efd;
           text-decoration: none;
           font-size: 1.05rem;
           transition: color 0.2s ease;
 
           &:hover {
-            color: #0051a0;
+            color: #5a23c8;
             text-decoration: underline;
           }
         }
