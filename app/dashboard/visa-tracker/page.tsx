@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, CheckCircle2, Clock, XCircle, FileText, Mail, Calendar, Plane, MapPin } from "lucide-react";
+import { Plus, CheckCircle2, Clock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -154,7 +154,7 @@ export default function VisaTrackerPage() {
         </CardHeader>
         <CardContent>
           <div className="visa-tracker-page__timeline">
-            {application.steps.map((step, index) => (
+            {application.steps.map((step) => (
               <div key={step.id} className="visa-tracker-page__timeline-item">
                 <div className="visa-tracker-page__timeline-line" />
                 <div className="visa-tracker-page__timeline-content">

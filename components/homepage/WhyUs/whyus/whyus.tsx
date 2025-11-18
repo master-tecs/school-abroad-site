@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { VolumeUp, VolumeOff } from "@mui/icons-material";
 import "./whyus.scss";

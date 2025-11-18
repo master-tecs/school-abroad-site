@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
-    const { data, emailContent, confirmationEmail } = await req.json();
+    const { data, confirmationEmail } = await req.json();
 
     // Format the email content for admin
     const adminEmailContent = `

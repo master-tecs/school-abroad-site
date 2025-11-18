@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, Search, Send, Heart, Share2, User, Clock } from "lucide-react";
+import { MessageCircle, Search, Send, Heart, Share2, Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import "./community.scss";
 

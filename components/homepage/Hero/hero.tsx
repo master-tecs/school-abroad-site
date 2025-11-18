@@ -20,7 +20,7 @@ export default function Hero() {
     // Check if badgeContainer already exists (from previous script load)
     if (
       existingScript ||
-      (typeof window !== "undefined" && (window as any).badgeContainer)
+      (typeof window !== "undefined" && "badgeContainer" in window)
     ) {
       return;
     }
