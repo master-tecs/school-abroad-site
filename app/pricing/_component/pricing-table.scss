@@ -67,7 +67,7 @@
         font-weight: 700;
   
         &.platinum {
-          color: #0048b3;
+          color: #732efd;
         }
   
         &.diamond {
@@ -128,24 +128,110 @@
       display: inline-block;
       font-weight: 600;
       border: none;
-      border-radius: 6px;
+      border-radius: 50px;
       padding: 0.8rem 1.2rem;
       cursor: pointer;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   
       &-primary {
-        background: #732efd;
+        // Platinum button: Purple with yellow accents
+        background: linear-gradient(135deg, #732efd 0%, #5a23c8 100%);
         color: #fff;
+        border: 2px solid transparent;
+        position: relative;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: 50px;
+          padding: 2px;
+          background: linear-gradient(135deg, #ffd60a, #ffcc00, #ffd60a);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          opacity: 0.6;
+          transition: opacity 0.3s ease;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 214, 10, 0.2), transparent);
+          transition: left 0.6s ease;
+        }
   
         &:hover {
-          background: #5a23c8;
+          background: linear-gradient(135deg, #5a23c8 0%, #732efd 100%);
+          box-shadow: 0 6px 25px rgba(115, 46, 253, 0.4), 0 0 30px rgba(255, 214, 10, 0.3);
+          transform: translateY(-2px);
+          
+          &::before {
+            opacity: 1;
+          }
+          
+          &::after {
+            left: 100%;
+          }
+        }
+  
+        &:active {
+          transform: translateY(0);
         }
   
         &.btn-diamond {
-          background: #0048b3;
+          // Diamond button: Yellow with purple accents (premium feel)
+          background: linear-gradient(135deg, #ffd60a 0%, #ffcc00 100%);
+          color: #1e294a;
+          border: 2px solid rgba(115, 46, 253, 0.3);
+          font-weight: 700;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(135deg, #732efd, #5a23c8, #732efd);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(115, 46, 253, 0.15), transparent);
+            transition: left 0.6s ease;
+          }
   
           &:hover {
-            background: #003180;
+            background: linear-gradient(135deg, #ffcc00 0%, #e6b800 100%);
+            border-color: rgba(115, 46, 253, 0.5);
+            box-shadow: 0 8px 30px rgba(255, 214, 10, 0.5), 0 0 35px rgba(115, 46, 253, 0.3);
+            transform: translateY(-3px);
+            
+            &::before {
+              opacity: 1;
+            }
+            
+            &::after {
+              left: 100%;
+            }
           }
         }
       }
@@ -154,10 +240,31 @@
         border: 2px solid #732efd;
         color: #732efd;
         background: transparent;
+        border-radius: 50px;
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 214, 10, 0.1), transparent);
+          transition: left 0.5s ease;
+        }
   
         &:hover {
-          background: #732efd;
+          background: linear-gradient(135deg, #732efd 0%, #5a23c8 100%);
           color: #fff;
+          border-color: #732efd;
+          box-shadow: 0 6px 20px rgba(115, 46, 253, 0.4), 0 0 20px rgba(255, 214, 10, 0.25);
+          transform: translateY(-2px);
+          
+          &::before {
+            left: 100%;
+          }
         }
       }
     }
