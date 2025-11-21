@@ -116,6 +116,13 @@
       font-weight: 600 !important;
       font-size: 1rem !important;
       height: auto !important;
+      background: linear-gradient(135deg, #732efd, #5a23c8) !important;
+      color: #fff !important;
+      border: none !important;
+      
+      &:hover {
+        background: linear-gradient(135deg, #5a23c8, #4a1da5) !important;
+      }
     }
   }
 

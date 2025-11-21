@@ -61,13 +61,12 @@ export default function Footer() {
           <div className="footer__col">
             <h5 className="footer__title">Useful Links</h5>
             <ul className="footer__links">
-              <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/services">Our Services</Link></li>
-              <li><Link href="/destination">Destinations</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
-              <li><Link href="/gallery">Gallery</Link></li>
-              <li><Link href="/global-partnerships">Global Partnerships</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
+              <li><Link href="/about-us">About Us</Link></li>
+              <li><Link href="/student">Our Services</Link></li>
+              <li><Link href="/student#destinations">Destinations</Link></li>
+              <li><Link href="/contact-us">Contact Us</Link></li>
+              <li><Link href="/agency">Agency Partnership</Link></li>
+              <li><Link href="/partner">Institution Partnership</Link></li>
               <li><Link href="/privacy-policy">Privacy Policy</Link></li>
               <li><Link href="/terms-of-service">Terms & Conditions</Link></li>
             </ul>

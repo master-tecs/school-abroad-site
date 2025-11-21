@@ -1,6 +1,9 @@
 "use client";
 
 import { FC } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 import "./services.scss";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
@@ -76,24 +79,82 @@ const services: Service[] = [
 ];
 
 const Services: FC = () => {
-  return (
-    <section className="services-section" id="services">
-      <div className="container">
-        <h2 className="services-title text-center">
-          Our <span className="highlight">Services</span>
-        </h2>
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-        <div className="services-grid">
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  return (
+    <section className="services-section" id="services" ref={ref}>
+      <div className="container">
+        <motion.h2
+          className="services-title text-center"
+          variants={titleVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          Our <span className="highlight">Services</span>
+        </motion.h2>
+
+        <motion.div
+          className="services-grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {services.map((service, idx) => (
-            <div key={idx} className="service-card">
-              <div className="service-card-icon">
+            <motion.div
+              key={idx}
+              className="service-card"
+              variants={cardVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div
+                className="service-card-icon"
+                whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                transition={{ duration: 0.5 }}
+              >
                 <service.Icon />
-              </div>
+              </motion.div>
               <h4 className="service-card-title">{service.title}</h4>
               <p className="service-card-description">{service.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

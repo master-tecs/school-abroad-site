@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Bot, Loader2, MessageCircle, X } from "lucide-react";
+import { Bot, Loader2, MessageCircle, X, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ChatLoading } from "@/components/ui/chat-loading";
+import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
 type ChatMessage = {
@@ -24,7 +26,7 @@ export default function Chatbot() {
       id: crypto.randomUUID(),
       role: "assistant",
       content:
-        "Hi there! 👋  Ask me anything about your membership, mentorship calls, or study abroad resources.",
+        "Hi! 👋 Welcome to School Abroad. I can answer your questions, service and mentorship plans, recommend programs, and guide you through our services. How can I help you get started today?",
     },
   ]);
   const [isSending, setIsSending] = useState(false);
@@ -134,55 +136,94 @@ export default function Chatbot() {
 
           <div
             ref={listRef}
-            className="mb-4 h-64 space-y-3 overflow-y-auto rounded-2xl border border-white/5 bg-white/5 p-3 pr-2 text-sm shadow-inner"
+            className="mb-4 h-64 overflow-y-auto rounded-2xl border border-white/5 bg-white/5 p-4 shadow-inner"
           >
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={clsx("flex", {
-                  "justify-end": message.role === "user",
-                  "justify-start": message.role === "assistant",
-                })}
-              >
-                <div
-                  className={clsx(
-                    "max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2 shadow-sm transition",
-                    message.role === "user"
-                      ? "bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 text-white"
-                      : "bg-white/10 text-blue-100 backdrop-blur"
-                  )}
-                >
-                  {message.content}
-                </div>
-              </div>
-            ))}
+            <div className="space-y-4">
+              <AnimatePresence initial={false}>
+                {messages.map((message) => (
+                  <motion.div
+                    key={message.id}
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{
+                      duration: 0.3,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className={clsx("flex items-end gap-2", {
+                      "justify-end": message.role === "user",
+                      "justify-start": message.role === "assistant",
+                    })}
+                  >
+                    {message.role === "assistant" && (
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ffd60a] to-[#ffcc00] flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <Bot className="w-4 h-4 text-slate-900" />
+                      </div>
+                    )}
+                    <div
+                      className={clsx(
+                        "max-w-[80%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 shadow-lg text-sm",
+                        message.role === "user"
+                          ? "bg-gradient-to-br from-[#732efd] via-[#6c63ff] to-[#5a23c8] text-white rounded-br-sm"
+                          : "bg-white/10 text-blue-100 backdrop-blur rounded-bl-sm border border-white/10"
+                      )}
+                    >
+                      {message.content}
+                    </div>
+                    {message.role === "user" && (
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#732efd] to-[#5a23c8] flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <User className="w-4 h-4 text-white" />
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
 
-            {isSending && (
-              <div className="flex justify-start">
-                <div className="flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-2 text-blue-100">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Thinking…
-                </div>
-              </div>
-            )}
+              {isSending && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex justify-start"
+                >
+                  <ChatLoading />
+                </motion.div>
+              )}
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="flex items-center gap-2">
-            <Input
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              placeholder="Type your question…"
-              className="flex-1 border-white/10 bg-white/10 text-sm text-white placeholder:text-blue-200/50 focus-visible:ring-blue-400"
-              autoComplete="off"
-            />
-            <Button
-              type="submit"
-              size="sm"
-              disabled={disabled}
-              className="rounded-full bg-blue-500 px-4 text-xs font-semibold uppercase tracking-wide text-white shadow-lg shadow-blue-900/40 transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-500/60"
+            <motion.div
+              className="flex-1"
+              whileFocus={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
             >
-              {isSending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send"}
-            </Button>
+              <Input
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                placeholder="Type your question…"
+                className="flex-1 border-white/10 bg-white/10 text-sm text-white placeholder:text-blue-200/50 focus-visible:ring-[#732efd] focus-visible:border-[#732efd]/50 transition-all"
+                autoComplete="off"
+              />
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                type="submit"
+                size="sm"
+                disabled={disabled}
+                className="rounded-full bg-gradient-to-r from-[#732efd] to-[#5a23c8] px-4 text-xs font-semibold text-white shadow-lg shadow-purple-900/40 transition hover:shadow-purple-900/60 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isSending ? (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Loader2 className="h-4 w-4" />
+                  </motion.div>
+                ) : (
+                  "Send"
+                )}
+              </Button>
+            </motion.div>
           </form>
         </div>
       )}

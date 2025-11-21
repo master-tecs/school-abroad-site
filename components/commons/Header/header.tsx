@@ -14,7 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -35,6 +35,7 @@ export default function Header() {
   const [user, setUser] = useState<{ name?: string | null; email?: string | null; image?: string | null } | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   const checkAuth = useCallback(async () => {
     try {
@@ -69,9 +70,66 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Add body padding when header is sticky to prevent content from being hidden
+  useEffect(() => {
+    const navbar = document.querySelector('.header__navbar');
+    
+    if (isSticky && navbar) {
+      const navbarHeight = navbar.getBoundingClientRect().height;
+      document.body.style.paddingTop = `${navbarHeight}px`;
+      document.body.style.transition = 'padding-top 0.3s ease';
+    } else {
+      document.body.style.paddingTop = '0';
+    }
+
+    return () => {
+      document.body.style.paddingTop = '0';
+      document.body.style.transition = '';
+    };
+  }, [isSticky]);
+
+  // Prevent body scroll when offcanvas is open on mobile
+  useEffect(() => {
+    if (isCanvasExpanded) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+    };
+  }, [isCanvasExpanded]);
+
+  // Close offcanvas menu when route changes
+  useEffect(() => {
+    setIsCanvasExpanded(false);
+  }, [pathname]);
+
   const toggleCanvasMenu = (e: MouseEvent<HTMLAnchorElement | HTMLDivElement | HTMLButtonElement>) => {
     e.preventDefault();
     setIsCanvasExpanded((prev) => !prev);
+  };
+
+  // Handle link clicks in offcanvas menu - close menu but allow navigation
+  const handleOffcanvasLinkClick = () => {
+    setIsCanvasExpanded(false);
   };
 
   const handleSignOut = async () => {
@@ -299,7 +357,7 @@ export default function Header() {
       {/* ---------- Offcanvas ---------- */}
       <div className={`header__offcanvas ${isCanvasExpanded ? "header__offcanvas--expanded" : ""}`}>
         <div className="header__offcanvas-header">
-          <Link href="/" onClick={toggleCanvasMenu}>
+          <Link href="/" onClick={handleOffcanvasLinkClick}>
             <Image
               src="/assets/images/logo.png"
               alt="Logo"
@@ -315,22 +373,22 @@ export default function Header() {
         <nav className="header__offcanvas-menu">
           <ul className="header__offcanvas-list">
             <li className="header__offcanvas-item">
-              <Link href="/" onClick={toggleCanvasMenu}>Home</Link>
+              <Link href="/" onClick={handleOffcanvasLinkClick}>Home</Link>
             </li>
             <li className="header__offcanvas-item">
-              <Link href="/about-us" onClick={toggleCanvasMenu}>About Us</Link>
+              <Link href="/about-us" onClick={handleOffcanvasLinkClick}>About Us</Link>
             </li>
             <li className="header__offcanvas-item">
-              <Link href="/student" onClick={toggleCanvasMenu}>Students</Link>
+              <Link href="/student" onClick={handleOffcanvasLinkClick}>Students</Link>
             </li>
             <li className="header__offcanvas-item">
-              <Link href="/agency" onClick={toggleCanvasMenu}>Partners</Link>
+              <Link href="/agency" onClick={handleOffcanvasLinkClick}>Partners</Link>
             </li>
             <li className="header__offcanvas-item">
-              <Link href="/partner" onClick={toggleCanvasMenu}>Institutions</Link>
+              <Link href="/partner" onClick={handleOffcanvasLinkClick}>Institutions</Link>
             </li>
             <li className="header__offcanvas-item">
-              <Link href="/contact-us" onClick={toggleCanvasMenu}>Contact</Link>
+              <Link href="/contact-us" onClick={handleOffcanvasLinkClick}>Contact</Link>
             </li>
           </ul>
 
@@ -341,7 +399,7 @@ export default function Header() {
                   <>
                     <Link
                       href="/dashboard"
-                      onClick={toggleCanvasMenu}
+                      onClick={handleOffcanvasLinkClick}
                       className="header__offcanvas-link"
                     >
                       <DashboardIcon />
@@ -349,7 +407,7 @@ export default function Header() {
                     </Link>
                     <Link
                       href="/dashboard/settings"
-                      onClick={toggleCanvasMenu}
+                      onClick={handleOffcanvasLinkClick}
                       className="header__offcanvas-link"
                     >
                       <SettingsIcon />
@@ -367,14 +425,14 @@ export default function Header() {
                   <>
                     <Link
                       href="/sign-in"
-                      onClick={toggleCanvasMenu}
+                      onClick={handleOffcanvasLinkClick}
                       className="header__offcanvas-link"
                     >
                       Sign In
                     </Link>
                     <Link
                       href="/sign-up"
-                      onClick={toggleCanvasMenu}
+                      onClick={handleOffcanvasLinkClick}
                       className="header__offcanvas-link header__offcanvas-link--primary"
                     >
                       Get Started

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import "./hero.scss";
 
 export default function Hero() {
@@ -40,9 +41,58 @@ export default function Hero() {
     };
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+    hover: {
+      scale: 1.05,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    tap: {
+      scale: 0.98,
+    },
+  };
+
   return (
     <section className="hero">
-      <div className="hero__video">
+      <motion.div
+        className="hero__video"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
         {isLoaded && (
           <video
             autoPlay
@@ -57,30 +107,58 @@ export default function Hero() {
             <source src="./assets/images/hero.mp4" type="video/mp4" />
           </video>
         )}
-      </div>
+      </motion.div>
 
-      <div className="hero__content">
-        <h5 className="hero__subtitle">
+      <motion.div
+        className="hero__content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h5 className="hero__subtitle" variants={itemVariants}>
           Welcome To <span>School Abroad</span>
-        </h5>
+        </motion.h5>
 
-        <h2 className="hero__title">
+        <motion.h2 className="hero__title" variants={itemVariants}>
           Our <span className="highlight">mission is to</span> broaden horizons
           and Study abroad with clarity, confidence, and mentorship.
-        </h2>
+        </motion.h2>
 
-        <div className="hero__buttons">
-          <a href="/student" className="btn btn--primary">
+        <motion.div
+          className="hero__buttons"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.a
+            href="/student"
+            className="btn btn--primary"
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
+          >
             I&apos;m a student
-          </a>
-          <a href="/partners" className="btn btn--outline">
+          </motion.a>
+          <motion.a
+            href="/partners"
+            className="btn btn--outline"
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
+          >
             I&apos;m a partner / Recruiter
-          </a>
-          <a href="/institutions" className="btn btn--outline">
+          </motion.a>
+          <motion.a
+            href="/institutions"
+            className="btn btn--outline"
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
+          >
             I&apos;m an Institution
-          </a>
-        </div>
-      </div>
+          </motion.a>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

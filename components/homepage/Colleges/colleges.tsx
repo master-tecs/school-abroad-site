@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import "./colleges.scss";
 
 const universities = [
@@ -12,10 +14,53 @@ const universities = [
 ];
 
 export default function Colleges() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
   return (
-    <section className="colleges-section">
+    <section className="colleges-section" ref={ref}>
       <div className="container">
-        <div className="text-center mb-5">
+        <motion.div
+          className="text-center mb-5"
+          variants={headerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           <h2 className="colleges-title">
             We help you find the ideal institutions for{" "}
             <span className="highlight">student success</span>
@@ -23,12 +68,27 @@ export default function Colleges() {
           <p className="colleges-subtitle">
             Partnered with top global universities to help students achieve academic excellence.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="colleges-logos">
+        <motion.div
+          className="colleges-logos"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {universities.map((university, index) => (
-            <div key={index} className="college-card">
-              <div className="college-logo">
+            <motion.div
+              key={index}
+              className="college-card"
+              variants={cardVariants}
+              whileHover={{ y: -8, scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div
+                className="college-logo"
+                whileHover={{ rotate: [0, -5, 5, -5, 0] }}
+                transition={{ duration: 0.5 }}
+              >
                 <Image
                   src={university.logo}
                   alt={university.name}
@@ -36,11 +96,11 @@ export default function Colleges() {
                   className="logo-img"
                   sizes="(max-width: 768px) 80px, 120px"
                 />
-              </div>
+              </motion.div>
               <p className="college-name">{university.name}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

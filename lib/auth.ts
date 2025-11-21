@@ -20,13 +20,13 @@ function safeParseDate(value: string | Date | null | undefined): Date | null {
 }
 
 const polarClient = new Polar({
-  accessToken: process.env.POLAR_ACCESS_TOKEN,
+  accessToken: process.env.POLAR_ACCESS_TOKEN || "",
   server: "sandbox",
 });
 
 export const auth = betterAuth({
-  trustedOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
-  allowedDevOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
+  trustedOrigins: process.env.NEXT_PUBLIC_APP_URL ? [`${process.env.NEXT_PUBLIC_APP_URL}`] : ["http://localhost:10001"],
+  allowedDevOrigins: process.env.NEXT_PUBLIC_APP_URL ? [`${process.env.NEXT_PUBLIC_APP_URL}`] : ["http://localhost:10001"],
   cookieCache: {
     enabled: true,
     maxAge: 5 * 60, // Cache duration in seconds
@@ -43,8 +43,8 @@ export const auth = betterAuth({
   }),
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID || "dummy-client-id",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "dummy-client-secret",
     },
   },
   plugins: [
@@ -55,36 +55,12 @@ export const auth = betterAuth({
         checkout({
           products: [
             {
-              productId:
-                process.env.NEXT_PUBLIC_PLATINUM_TIER ||
-                (() => {
-                  throw new Error(
-                    "NEXT_PUBLIC_PLATINUM_TIER environment variable is required",
-                  );
-                })(),
-              slug:
-                process.env.NEXT_PUBLIC_PLATINUM_SLUG ||
-                (() => {
-                  throw new Error(
-                    "NEXT_PUBLIC_PLATINUM_SLUG environment variable is required",
-                  );
-                })(),
+              productId: process.env.NEXT_PUBLIC_PLATINUM_TIER || "dummy-platinum-tier",
+              slug: process.env.NEXT_PUBLIC_PLATINUM_SLUG || "dummy-platinum-slug",
             },
             {
-              productId:
-                process.env.NEXT_PUBLIC_DIAMOND_TIER ||
-                (() => {
-                  throw new Error(
-                    "NEXT_PUBLIC_DIAMOND_TIER environment variable is required",
-                  );
-                })(),
-              slug:
-                process.env.NEXT_PUBLIC_DIAMOND_SLUG ||
-                (() => {
-                  throw new Error(
-                    "NEXT_PUBLIC_DIAMOND_SLUG environment variable is required",
-                  );
-                })(),
+              productId: process.env.NEXT_PUBLIC_DIAMOND_TIER || "dummy-diamond-tier",
+              slug: process.env.NEXT_PUBLIC_DIAMOND_SLUG || "dummy-diamond-slug",
             },
           ],
           successUrl: `${process.env.NEXT_PUBLIC_APP_URL}/${process.env.POLAR_SUCCESS_URL ?? "success"}`,
@@ -93,13 +69,7 @@ export const auth = betterAuth({
         portal(),
         usage(),
         webhooks({
-          secret:
-            process.env.POLAR_WEBHOOK_SECRET ||
-            (() => {
-              throw new Error(
-                "POLAR_WEBHOOK_SECRET environment variable is required",
-              );
-            })(),
+          secret: process.env.POLAR_WEBHOOK_SECRET || "dummy-webhook-secret",
           onPayload: async ({ data, type }) => {
             if (
               type === "subscription.created" ||

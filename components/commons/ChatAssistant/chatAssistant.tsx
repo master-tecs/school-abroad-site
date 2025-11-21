@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
+import { ChatLoadingAdvanced } from "@/components/ui/chat-loading";
 import "./chatAssistant.scss";
 
 interface Message {
@@ -97,8 +99,7 @@ export default function ChatAssistant() {
   const [messages, setMessages] = useState<Message[]>([
     {
       sender: "bot",
-      text:
-        "Hi! I’m your School Abroad assistant. Ask me about mentorship plans, bookings, or anything else you need.",
+      text: "Hi! 👋 Welcome to School Abroad. I can answer your questions, service and mentorship plans, recommend programs, and guide you through our services. How can I help you get started today?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -119,7 +120,7 @@ export default function ChatAssistant() {
     if (typeof window === "undefined") return;
 
     const storedSession = window.localStorage.getItem(
-      "schoolAbroadChatSessionId",
+      "schoolAbroadChatSessionId"
     );
     if (storedSession) {
       setSessionId(storedSession);
@@ -142,7 +143,7 @@ export default function ChatAssistant() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sessionId }),
-          },
+          }
         );
 
         if (response.ok) {
@@ -151,14 +152,14 @@ export default function ChatAssistant() {
             typeof data?.sessionId === "string"
               ? data.sessionId
               : typeof data?.data?.sessionId === "string"
-                ? data.data.sessionId
-                : undefined;
+              ? data.data.sessionId
+              : undefined;
 
           if (responseSession && responseSession !== sessionId) {
             if (typeof window !== "undefined") {
               window.localStorage.setItem(
                 "schoolAbroadChatSessionId",
-                responseSession,
+                responseSession
               );
             }
             setSessionId(responseSession);
@@ -196,7 +197,11 @@ export default function ChatAssistant() {
       const updated = [...prev];
       const lastMessage = updated[updated.length - 1];
 
-      if (lastMessage && lastMessage.sender === "bot" && lastMessage.streaming) {
+      if (
+        lastMessage &&
+        lastMessage.sender === "bot" &&
+        lastMessage.streaming
+      ) {
         updated[updated.length - 1] = {
           ...lastMessage,
           text: `${lastMessage.text}${text}`,
@@ -221,8 +226,8 @@ export default function ChatAssistant() {
               ...msg,
               streaming: false,
             }
-          : msg,
-      ),
+          : msg
+      )
     );
   };
 
@@ -230,15 +235,13 @@ export default function ChatAssistant() {
     const rawMessages: StructuredMessage[] = Array.isArray(payload?.messages)
       ? payload.messages!
       : Array.isArray(payload?.data?.messages)
-        ? payload.data!.messages!
-        : [];
+      ? payload.data!.messages!
+      : [];
 
     if (!rawMessages.length) return false;
 
     const replies: Message[] = rawMessages
-      .filter(
-        (item) => (item?.sender ?? "").toLowerCase() !== "user",
-      )
+      .filter((item) => (item?.sender ?? "").toLowerCase() !== "user")
       .map((item) => ({
         sender: "bot" as const,
         text: String(item?.text ?? item?.message ?? ""),
@@ -256,14 +259,14 @@ export default function ChatAssistant() {
       typeof payload?.sessionId === "string"
         ? payload.sessionId
         : typeof payload?.data?.sessionId === "string"
-          ? payload.data.sessionId
-          : undefined;
+        ? payload.data.sessionId
+        : undefined;
 
     if (responseSession && responseSession !== sessionId) {
       if (typeof window !== "undefined") {
         window.localStorage.setItem(
           "schoolAbroadChatSessionId",
-          responseSession,
+          responseSession
         );
       }
       setSessionId(responseSession);
@@ -363,15 +366,13 @@ export default function ChatAssistant() {
             }
 
             if (typeof payload === "string") {
-                appendStreamingText(payload);
+              appendStreamingText(payload);
               assistantResponded = true;
               continue;
             }
           }
 
-          await new Promise((resolve) =>
-            setTimeout(resolve, STREAM_DELAY_MS),
-          );
+          await new Promise((resolve) => setTimeout(resolve, STREAM_DELAY_MS));
         }
       }
 
@@ -387,8 +388,7 @@ export default function ChatAssistant() {
           ...prev,
           {
             sender: "bot",
-            text:
-              "I’m sorry—I couldn’t find an answer. Please try rephrasing your question.",
+            text: "I’m sorry—I couldn’t find an answer. Please try rephrasing your question.",
           },
         ]);
       }
@@ -398,8 +398,7 @@ export default function ChatAssistant() {
         ...prev,
         {
           sender: "bot",
-          text:
-            "Something went wrong reaching the assistant. Please try again in a moment.",
+          text: "Something went wrong reaching the assistant. Please try again in a moment.",
         },
       ]);
     } finally {
@@ -436,41 +435,95 @@ export default function ChatAssistant() {
       {open && (
         <div className="chat-body">
           <div className="messages">
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`message ${msg.sender}${msg.streaming ? " streaming" : ""}`}
-              >
-                <span className="message-text">{msg.text}</span>
-                {msg.streaming && <span className="live-cursor" />}
-              </div>
-            ))}
+            <AnimatePresence initial={false}>
+              {messages.map((msg, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className={`message-wrapper ${msg.sender}`}
+                >
+                  <div
+                    className={`message ${msg.sender}${
+                      msg.streaming ? " streaming" : ""
+                    }`}
+                  >
+                    {msg.sender === "bot" && (
+                      <div className="message-avatar bot-avatar">
+                        <SmartToyIcon />
+                      </div>
+                    )}
+                    <div className="message-content">
+                      <span className="message-text">{msg.text}</span>
+                      {msg.streaming && <span className="live-cursor" />}
+                    </div>
+                    {msg.sender === "user" && (
+                      <div className="message-avatar user-avatar">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                          <circle cx="12" cy="7" r="4" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
             {loading && !hasStreamingMessage && (
-              <div className="message bot typing-indicator">
-                <span />
-                <span />
-                <span />
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="typing-indicator-wrapper"
+              >
+                <ChatLoadingAdvanced />
+              </motion.div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
           <div className="chat-input">
-            <input
+            <motion.input
               type="text"
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder="Type your message..."
               onKeyDown={handleKeyDown}
               disabled={loading}
+              whileFocus={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
             />
-            <button
+            <motion.button
               type="button"
               onClick={handleSend}
               disabled={loading || input.trim().length === 0}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+              className="send-button"
             >
-              {loading ? "..." : <SendIcon />}
-            </button>
+              {loading ? (
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                >
+                  <SendIcon />
+                </motion.div>
+              ) : (
+                <SendIcon />
+              )}
+            </motion.button>
           </div>
         </div>
       )}

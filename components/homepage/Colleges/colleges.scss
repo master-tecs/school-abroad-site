@@ -43,11 +43,8 @@
   
     .college-card {
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-      &:hover {
-        transform: translateY(-5px);
-      }
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: default;
   
       .college-logo {
         position: relative;
@@ -60,15 +57,20 @@
         align-items: center;
         justify-content: center;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   
         &:hover {
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 6px 20px rgba(115, 46, 253, 0.2);
         }
   
         .logo-img {
           object-fit: contain;
           padding: 15px;
+          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        &:hover .logo-img {
+          transform: scale(1.1);
         }
       }
   
@@ -77,6 +79,11 @@
         font-weight: 500;
         color: #333;
         margin-top: 0.25rem;
+        transition: color 0.3s ease;
+      }
+
+      &:hover .college-name {
+        color: #732efd;
       }
     }
   
