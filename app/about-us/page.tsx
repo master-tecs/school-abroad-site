@@ -2,18 +2,6 @@
 
 import Image from "next/image";
 import "./about-us.scss";
-
-export const metadata: Metadata = {
-  title: "About Us - Global Student Migration Platform | School Abroad",
-  description:
-    "Learn about School Abroad's mission to make studying abroad accessible, affordable, and transparent. Expert guidance for university admission, visa processing, and student settlement worldwide.",
-  openGraph: {
-    title: "About School Abroad - Global Student Migration Platform",
-    description:
-      "Learn about School Abroad's mission to make studying abroad accessible, affordable, and transparent for students worldwide.",
-    url: "https://schoolabroad.org/about-us",
-  },
-};
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SchoolIcon from "@mui/icons-material/School";
 import GroupsIcon from "@mui/icons-material/Groups";
