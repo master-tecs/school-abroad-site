@@ -297,4 +297,4 @@ This project is proprietary software owned by School Abroad / School Outside.
 
 ---
 
-**Built with ❤️ for students pursuing their dreams of international education.**
+**Built with ❤️ for students pursuing their dreams of international education all over the world.**
