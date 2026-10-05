@@ -293,7 +293,7 @@ npm start
 
 ## 📝 License
 
-This project is proprietary software owned by School Abroad / School Outside.
+MIT. See [LICENSE](LICENSE).
 
 ---
 
